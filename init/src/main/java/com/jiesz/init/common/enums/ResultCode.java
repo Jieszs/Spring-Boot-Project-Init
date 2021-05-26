@@ -1,4 +1,4 @@
-package com.jiesz.init.common.bean;
+package com.jiesz.init.common.enums;
 
 
 

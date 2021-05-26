@@ -1,7 +1,7 @@
 package com.jiesz.init.exception;
 
 
-import com.jiesz.init.common.bean.ResultCode;
+import com.jiesz.init.common.enums.ResultCode;
 
 
 public class BizException extends RuntimeException {

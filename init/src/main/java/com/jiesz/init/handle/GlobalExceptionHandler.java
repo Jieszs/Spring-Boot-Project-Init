@@ -2,7 +2,7 @@ package com.jiesz.init.handle;
 
 
 import com.jiesz.init.common.bean.Result;
-import com.jiesz.init.common.bean.ResultCode;
+import com.jiesz.init.common.enums.ResultCode;
 import com.jiesz.init.exception.BizException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
