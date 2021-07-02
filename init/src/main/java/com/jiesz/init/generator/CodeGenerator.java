@@ -14,28 +14,28 @@ import java.util.*;
 
 public class CodeGenerator {
     //表名
-    private static final String tableName = "tag_info";
+    private static final String TABLE_NAME = "tag_info";
     //实体名
-    private static final String entityName = "Tag";
+    private static final String ENTITY_NAME = "Tag";
     //是否分页
-    private static final Boolean enablePage = false;
+    private static final Boolean ENABLE_PAGE = false;
     //是否树结构
-    private static final Boolean enableTree = true;
-    private static final List<String> saveAndUpdateIgnoreFields = Arrays.asList("insertTime", "updateTime", "state");
+    private static final Boolean ENABLE_TREE = true;
+    private static final List<String> SAVE_AND_UPDATE_IGNORE_FIELDS = Arrays.asList("insertTime", "updateTime", "state");
     //查询条件
-    private static final List<String> selectIgnoreFields = Arrays.asList("insertTime", "updateTime", "state");
-    private static final IdType idType = IdType.AUTO;
+    private static final List<String> SELECT_IGNORE_FIELDS = Arrays.asList("insertTime", "updateTime", "state");
+    private static final IdType ID_TYPE = IdType.AUTO;
     //逻辑删除字段
-    private static final String logicDeleteFieldName = "state";
-    private static final String existFieldName = "tagName";
-    private static final String url = "jdbc:mysql://localhost:3306/mptest?characterEncoding=utf8&useSSL=false&serverTimezone=UTC&rewriteBatchedStatementshedStatements=true&allowMultiQueries=true";
-    private static final String username = "root";
-    private static final String password = "centerm123";
+    private static final String LOGIC_DELETE_FIELD_NAME = "state";
+    private static final String EXIST_FIELD_NAME = "tagName";
+    private static final String URL = "jdbc:mysql://localhost:3306/writing_home?characterEncoding=utf8&useSSL=false&serverTimezone=UTC&rewriteBatchedStatementshedStatements=true&allowMultiQueries=true";
+    private static final String USERNAME = "root";
+    private static final String PASSWORD = "123456";
     //根包名
-    private static final String parentPackageName = "com.jiesz.init";
-    private static final String ignoreTablePrefix = null;
-    private static final String versionFieldName = null;
-    private static final String projectPath = System.getProperty("user.dir");
+    private static final String PARENT_PACKAGE_NAME = "com.jiesz.writinghome";
+    private static final String IGNORE_TABLE_PREFIX = null;
+    private static final String VERSION_FIELD_NAME = null;
+    private static final String PROJECT_PATH = System.getProperty("user.dir");
 
 
     public static void main(String[] args) {
@@ -59,13 +59,13 @@ public class CodeGenerator {
         mpg.setStrategy(strategy);
         //自定义注入信息配置
         Map<String, Object> map = new HashMap<>();
-        map.put("parentPackageName", parentPackageName);
-        map.put("urlName", entityName.toLowerCase() + "s");
-        map.put("enablePage", enablePage);
-        map.put("enableTree", enableTree);
-        map.put("saveAndUpdateIgnoreFields", saveAndUpdateIgnoreFields);
-        map.put("selectIgnoreFields", selectIgnoreFields);
-        map.put("existFieldName", existFieldName);
+        map.put("parentPackageName", PARENT_PACKAGE_NAME);
+        map.put("urlName", ENTITY_NAME.toLowerCase() + "s");
+        map.put("enablePage", ENABLE_PAGE);
+        map.put("enableTree", ENABLE_TREE);
+        map.put("saveAndUpdateIgnoreFields", SAVE_AND_UPDATE_IGNORE_FIELDS);
+        map.put("selectIgnoreFields", SELECT_IGNORE_FIELDS);
+        map.put("existFieldName", EXIST_FIELD_NAME);
         InjectionConfig cfg = getInjectionConfig(map);
         // 自定义输出文件配置
         List<FileOutConfig> focList = new ArrayList<>();
@@ -82,7 +82,7 @@ public class CodeGenerator {
         focList.add(new FileOutConfig(mappterTemplatePath) {
             @Override
             public String outputFile(TableInfo tableInfo) {
-                return projectPath + "/src/main/resources/mapper/" + entityName + "Mapper" + StringPool.DOT_XML;
+                return PROJECT_PATH + "/src/main/resources/mapper/" + ENTITY_NAME + "Mapper" + StringPool.DOT_XML;
             }
         });
     }
@@ -136,18 +136,18 @@ public class CodeGenerator {
         strategy.setRestControllerStyle(true);
         strategy.setEntityTableFieldAnnotationEnable(true);
         // 忽视前缀
-        if (!StringUtils.isEmpty(ignoreTablePrefix)) {
-            strategy.setTablePrefix(ignoreTablePrefix);
+        if (!StringUtils.isEmpty(IGNORE_TABLE_PREFIX)) {
+            strategy.setTablePrefix(IGNORE_TABLE_PREFIX);
         }
         // 逻辑删除
-        if (!StringUtils.isEmpty(logicDeleteFieldName)) {
-            strategy.setLogicDeleteFieldName(logicDeleteFieldName);
+        if (!StringUtils.isEmpty(LOGIC_DELETE_FIELD_NAME)) {
+            strategy.setLogicDeleteFieldName(LOGIC_DELETE_FIELD_NAME);
         }
         // 乐观锁
-        if (!StringUtils.isEmpty(versionFieldName)) {
-            strategy.setVersionFieldName(versionFieldName);
+        if (!StringUtils.isEmpty(VERSION_FIELD_NAME)) {
+            strategy.setVersionFieldName(VERSION_FIELD_NAME);
         }
-        strategy.setInclude(tableName);
+        strategy.setInclude(TABLE_NAME);
         strategy.setControllerMappingHyphenStyle(true);
         return strategy;
     }
@@ -160,7 +160,7 @@ public class CodeGenerator {
     private static PackageConfig getPackageConfig() {
         // 包配置
         PackageConfig pc = new PackageConfig();
-        pc.setParent(parentPackageName);//主包名
+        pc.setParent(PARENT_PACKAGE_NAME);//主包名
         return pc;
     }
 
@@ -172,7 +172,7 @@ public class CodeGenerator {
     private static GlobalConfig getGlobalConfig() {
         // 全局配置
         GlobalConfig gc = new GlobalConfig();
-        gc.setOutputDir(projectPath + "/src/main/java");
+        gc.setOutputDir(PROJECT_PATH + "/src/main/java");
         gc.setAuthor("Jiesz");
         gc.setOpen(false);
         // 是否覆盖目录
@@ -185,12 +185,12 @@ public class CodeGenerator {
         gc.setBaseResultMap(true);
         gc.setBaseColumnList(true);
         //主键策略
-        gc.setIdType(idType);
-        gc.setEntityName(entityName );
-        gc.setControllerName(entityName + "Controller");
-        gc.setMapperName(entityName + "Mapper");
-        gc.setServiceName("I" + entityName + "Service");
-        gc.setServiceImplName(entityName + "ServiceImpl");
+        gc.setIdType(ID_TYPE);
+        gc.setEntityName(ENTITY_NAME);
+        gc.setControllerName(ENTITY_NAME + "Controller");
+        gc.setMapperName(ENTITY_NAME + "Mapper");
+        gc.setServiceName("I" + ENTITY_NAME + "Service");
+        gc.setServiceImplName(ENTITY_NAME + "ServiceImpl");
         return gc;
     }
 
@@ -202,10 +202,10 @@ public class CodeGenerator {
     private static DataSourceConfig getDataSourceConfig() {
         // 数据源配置
         DataSourceConfig dsc = new DataSourceConfig();
-        dsc.setUrl(url);
+        dsc.setUrl(URL);
         dsc.setDriverName("com.mysql.cj.jdbc.Driver");
-        dsc.setUsername(username);
-        dsc.setPassword(password);
+        dsc.setUsername(USERNAME);
+        dsc.setPassword(PASSWORD);
         return dsc;
     }
 }
