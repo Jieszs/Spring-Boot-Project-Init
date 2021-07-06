@@ -3,12 +3,10 @@ package com.jiesz.init.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpHeaders;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.http.HttpMethod;
 import springfox.documentation.builders.*;
-import springfox.documentation.schema.ModelRef;
 import springfox.documentation.service.*;
 import springfox.documentation.spi.DocumentationType;
-import springfox.documentation.spi.service.contexts.SecurityContext;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
@@ -27,7 +25,18 @@ public class SwaggerConfig {
 
     @Bean
     public Docket createRestApi() {
+        List<Response> responseList = new ArrayList<>();
+        responseList.add(new ResponseBuilder().code("1001").description("请求参数格式错误").build());
+        responseList.add(new ResponseBuilder().code("2002").description("系统外部接口调用异常").build());
+        responseList.add(new ResponseBuilder().code("3001").description("数据未找到").build());
+        responseList.add(new ResponseBuilder().code("5001").description("没有访问权限").build());
+        responseList.add(new ResponseBuilder().code("4001").description("服务器内部错误").build());
+
         return new Docket(DocumentationType.SWAGGER_2)
+                .globalResponses(HttpMethod.GET,responseList)
+                .globalResponses(HttpMethod.POST,responseList)
+                .globalResponses(HttpMethod.PUT,responseList)
+                .globalResponses(HttpMethod.DELETE,responseList)
                 .apiInfo(apiInfo())
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("com.jiesz.init.controller"))
