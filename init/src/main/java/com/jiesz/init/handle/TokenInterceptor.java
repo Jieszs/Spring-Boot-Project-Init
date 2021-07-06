@@ -2,9 +2,9 @@ package com.jiesz.init.handle;
 
 
 import com.alibaba.druid.util.StringUtils;
-import com.google.common.net.HttpHeaders;
 import com.jiesz.init.exception.UnauthorizedException;
 import com.jiesz.init.util.TokenUtil;
+import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;

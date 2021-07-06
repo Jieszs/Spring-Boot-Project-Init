@@ -123,7 +123,7 @@ public class GlobalExceptionHandler {
 	 */
 	@ExceptionHandler(value = UnauthorizedException.class)
 	public Result<?> bizExceptionHandler(UnauthorizedException e) {
-		return Result.fail(Integer.parseInt(e.getErrorCode()), e.getErrorMsg());
+		return Result.fail(401, e.getErrorMsg());
 	}
 	/**
 	 * 处理空指针的异常
