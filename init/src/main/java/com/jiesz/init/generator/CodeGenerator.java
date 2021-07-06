@@ -14,13 +14,13 @@ import java.util.*;
 
 public class CodeGenerator {
     //表名
-    private static final String TABLE_NAME = "tag_info";
+    private static final String TABLE_NAME = "material";
     //实体名
-    private static final String ENTITY_NAME = "Tag";
+    private static final String ENTITY_NAME = "Material";
     //是否分页
-    private static final Boolean ENABLE_PAGE = false;
+    private static final Boolean ENABLE_PAGE = true;
     //是否树结构
-    private static final Boolean ENABLE_TREE = true;
+    private static final Boolean ENABLE_TREE = false;
     private static final List<String> SAVE_AND_UPDATE_IGNORE_FIELDS = Arrays.asList("insertTime", "updateTime", "state");
     //查询条件
     private static final List<String> SELECT_IGNORE_FIELDS = Arrays.asList("insertTime", "updateTime", "state");

@@ -4,6 +4,7 @@ package com.jiesz.init.handle;
 import com.jiesz.init.common.bean.Result;
 import com.jiesz.init.common.enums.ResultCode;
 import com.jiesz.init.exception.BizException;
+import com.jiesz.init.exception.UnauthorizedException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -114,6 +115,16 @@ public class GlobalExceptionHandler {
 		return Result.fail(Integer.parseInt(e.getErrorCode()), e.getErrorMsg());
 	}
 
+	/**
+	 * token校验异常
+	 *
+	 * @param e 异常
+	 * @return 结果
+	 */
+	@ExceptionHandler(value = UnauthorizedException.class)
+	public Result<?> bizExceptionHandler(UnauthorizedException e) {
+		return Result.fail(Integer.parseInt(e.getErrorCode()), e.getErrorMsg());
+	}
 	/**
 	 * 处理空指针的异常
 	 *
