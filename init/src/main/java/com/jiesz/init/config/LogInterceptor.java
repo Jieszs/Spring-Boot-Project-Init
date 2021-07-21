@@ -54,18 +54,18 @@ public class LogInterceptor implements ClientHttpRequestInterceptor {
             response.getHeaders().keySet().forEach((key) -> {
                 logger.debug("《《 Header      : {}", key + ":" + Objects.requireNonNull(response.getHeaders().get(key)).toString());
             });
-            StringBuilder inputStringBuilder = new StringBuilder();
-            try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(response.getBody(), StandardCharsets.UTF_8))) {
-                String line = bufferedReader.readLine();
-                while (line != null) {
-                    inputStringBuilder.append(line);
-                    inputStringBuilder.append('\n');
-                    line = bufferedReader.readLine();
-                }
-            }
-            String resp = inputStringBuilder.length() > 1000 ? inputStringBuilder.substring(0, 1000) : inputStringBuilder.toString();
-            logger.debug("《《 Response body: {}", resp);
         }
+        StringBuilder inputStringBuilder = new StringBuilder();
+        try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(response.getBody(), StandardCharsets.UTF_8))) {
+            String line = bufferedReader.readLine();
+            while (line != null) {
+                inputStringBuilder.append(line);
+                inputStringBuilder.append('\n');
+                line = bufferedReader.readLine();
+            }
+        }
+        String resp = inputStringBuilder.length() > 500 ? inputStringBuilder.substring(0, 500) : inputStringBuilder.toString();
+        logger.info("《《 Response body: {}", resp);
     }
 
     public Logger getLogger() {
